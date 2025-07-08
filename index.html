@@ -1,1 +1,1650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EvoLearn AI - Where Every Child's Learning Journey Begins</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --primary-color: #6B46C1;
+            --secondary-color: #10B981;
+            --accent-color: #EC4899;
+            --dark-bg: #1E1B4B;
+            --light-text: #F9FAFB;
+            --body-text: #4B5563;
+            --card-bg: #F3F4F6;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--body-text);
+            overflow-x: hidden;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(30, 27, 75, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--light-text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: "🤖";
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .cta-button {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+            background: #059669;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #312E81 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Image placeholder styles */
+        .image-placeholder {
+            background: linear-gradient(135deg, rgba(107, 70, 193, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%);
+            border: 2px dashed rgba(107, 70, 193, 0.5);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-placeholder::before {
+            content: "🖼️";
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.2;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            opacity: 0.2;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.2; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-text h1 span {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: #E5E7EB;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .secondary-button {
+            background: transparent;
+            color: var(--light-text);
+            padding: 0.75rem 2rem;
+            border: 2px solid var(--light-text);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .secondary-button:hover {
+            background: var(--light-text);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+        }
+
+        .hero-visual {
+            position: relative;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .hero-visual-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-visual-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--secondary-color) 0%, transparent 70%);
+            opacity: 0.1;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .avatar-showcase {
+            font-size: 8rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: var(--card-bg);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark-bg);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.25rem;
+            color: var(--body-text);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        .feature-card:nth-child(2) .feature-icon {
+            animation-delay: 0.2s;
+        }
+
+        .feature-card:nth-child(3) .feature-icon {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: var(--dark-bg);
+            margin-bottom: 1rem;
+        }
+
+        /* Age Groups Section */
+        .age-groups {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .age-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .age-tab {
+            padding: 1rem 2rem;
+            background: var(--card-bg);
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--body-text);
+        }
+
+        .age-tab.active {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .age-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .age-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .age-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .age-activities {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+        }
+
+        .activity-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .activity-list li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .activity-list li::before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: """;
+            font-size: 4rem;
+            color: var(--primary-color);
+            opacity: 0.2;
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card.featured {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured .price,
+        .pricing-card.featured h3 {
+            color: white;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 1rem 0;
+        }
+
+        .price span {
+            font-size: 1rem;
+            font-weight: normal;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .pricing-features li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .pricing-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .pricing-card.featured .pricing-features li::before {
+            color: white;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-bg) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            top: -150px;
+            left: -150px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            color: var(--light-text);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            padding: 0.25rem 0;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--dark-bg);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .age-content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+
+        /* Loading Animation */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            background: var(--dark-bg);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">EvoLearn AI</a>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#age-groups">Age Groups</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#start" class="cta-button">Start Free Trial</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Where Every Child's <span>Learning Journey</span> Begins</h1>
+                <p>Experience the future of education with 3D AI companions that see, understand, and engage with your child's world. From mealtime curiosity to bedtime stories, every moment becomes a learning adventure.</p>
+                <div class="hero-buttons">
+                    <a href="#start" class="cta-button">Start 14-Day Free Trial</a>
+                    <a href="#demo" class="secondary-button">Watch Demo</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div style="width: 100%; height: 500px; border-radius: 20px; position: relative; overflow: hidden; background: linear-gradient(135deg, #6B46C1 0%, #EC4899 100%);">
+                    <div style="position: absolute; inset: 0; background: rgba(30, 27, 75, 0.3); display: flex; align-items: center; justify-content: center;">
+                        <div style="text-align: center; padding: 2rem;">
+                            <div style="font-size: 6rem; margin-bottom: 2rem; animation: float 3s ease-in-out infinite;">
+                                🎓
+                            </div>
+                            <h3 style="color: white; font-size: 2rem; margin-bottom: 1rem;">AI-Powered Learning</h3>
+                            <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; margin-bottom: 2rem;">Immersive conversations that adapt to your child</p>
+                            <div style="display: flex; gap: 2rem; justify-content: center; font-size: 3rem;">
+                                <span title="Robot Avatar" style="animation: bounce 2s ease-in-out infinite;">🤖</span>
+                                <span title="Fox Avatar" style="animation: bounce 2s ease-in-out infinite; animation-delay: 0.2s;">🦊</span>
+                                <span title="Unicorn Avatar" style="animation: bounce 2s ease-in-out infinite; animation-delay: 0.4s;">🦄</span>
+                                <span title="Bear Avatar" style="animation: bounce 2s ease-in-out infinite; animation-delay: 0.6s;">🐻</span>
+                            </div>
+                            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin-top: 2rem; font-style: italic;">
+                                "What are you eating? Those noodles look delicious! Did you know they come from Japan?"
+                            </p>
+                            <small style="color: rgba(255,255,255,0.6);">- Real conversation from Eva, our AI companion</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Revolutionary 3D Avatar Learning</h2>
+                <p>Your child's AI companion sees, understands, and responds to their world</p>
+            </div>
+            <div style="width: 100%; height: 250px; margin-bottom: 3rem; border-radius: 20px; position: relative; overflow: hidden;">
+                <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&h=400&fit=crop" alt="Children learning with technology" style="width: 100%; height: 100%; object-fit: cover;">
+                <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(107, 70, 193, 0.8), rgba(236, 72, 153, 0.8)); border-radius: 20px; display: flex; align-items: center; justify-content: center;">
+                    <h3 style="color: white; font-size: 2rem; text-align: center;">Transforming Education Through AI</h3>
+                </div>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👁️</div>
+                    <h3>Context-Aware Conversations</h3>
+                    <p>Our 3D avatars observe your child's environment and activities, creating natural learning moments from everyday experiences.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎭</div>
+                    <h3>Emotion Recognition</h3>
+                    <p>Advanced AI detects facial expressions and emotional states, adapting conversations to provide support and encouragement when needed.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💭</div>
+                    <h3>Curiosity-Driven Learning</h3>
+                    <p>Avatars ask thought-provoking questions about your child's activities, turning mealtime, playtime, and daily routines into learning adventures.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Real-World Connections</h3>
+                    <p>From "Where do noodles come from?" to "How do airplanes fly?" - every conversation connects to broader learning concepts.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🗣️</div>
+                    <h3>Natural Language Processing</h3>
+                    <p>Children speak naturally while our AI understands context, intent, and emotion, creating truly meaningful two-way conversations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Safe & Private</h3>
+                    <p>All conversations are monitored for safety, with complete parental controls and COPPA-compliant privacy protection.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" style="padding: 5rem 0; background: white;">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Experience the Magic of Conversational Learning</h2>
+                <p>See how our 3D avatars transform everyday moments into learning opportunities</p>
+            </div>
+            <div style="width: 100%; height: 300px; margin: 3rem 0; border-radius: 20px; position: relative; overflow: hidden;">
+                <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1200&h=300&fit=crop" alt="Digital learning concept" style="width: 100%; height: 100%; object-fit: cover;">
+                <div style="position: absolute; inset: 0; background: rgba(30, 27, 75, 0.7); border-radius: 20px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem;">
+                    <div>
+                        <h3 style="color: white; font-size: 1.8rem; margin-bottom: 1rem;">Natural Conversations That Inspire Learning</h3>
+                        <p style="color: rgba(255,255,255,0.9);">Every meal, every playtime, every moment becomes an opportunity to learn and grow</p>
+                    </div>
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; margin-top: 3rem;">
+                <div style="text-align: center;">
+                    <div style="background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%); padding: 2rem; border-radius: 20px; margin-bottom: 1rem;">
+                        <div style="font-size: 4rem;">🍜</div>
+                        <h4 style="margin: 1rem 0;">During Mealtime</h4>
+                        <div style="background: white; padding: 1rem; border-radius: 10px; text-align: left;">
+                            <p style="color: #6B46C1; font-weight: bold; margin-bottom: 0.5rem;">Avatar: "Those noodles look yummy! Do you know what country they come from?"</p>
+                            <p style="color: #059669; font-style: italic;">Child: "I don't know..."</p>
+                            <p style="color: #6B46C1; font-weight: bold;">Avatar: "They're from Japan! Want to learn how to say 'delicious' in Japanese?"</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%); padding: 2rem; border-radius: 20px; margin-bottom: 1rem;">
+                        <div style="font-size: 4rem;">🎨</div>
+                        <h4 style="margin: 1rem 0;">During Play</h4>
+                        <div style="background: white; padding: 1rem; border-radius: 10px; text-align: left;">
+                            <p style="color: #6B46C1; font-weight: bold; margin-bottom: 0.5rem;">Avatar: "Wow, you're using so many colors! Which one is your favorite?"</p>
+                            <p style="color: #059669; font-style: italic;">Child: "Blue!"</p>
+                            <p style="color: #6B46C1; font-weight: bold;">Avatar: "Blue like the ocean! Did you know the ocean looks blue because of how light bounces off water?"</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%); padding: 2rem; border-radius: 20px; margin-bottom: 1rem;">
+                        <div style="font-size: 4rem;">😢</div>
+                        <h4 style="margin: 1rem 0;">Emotional Moments</h4>
+                        <div style="background: white; padding: 1rem; border-radius: 10px; text-align: left;">
+                            <p style="color: #6B46C1; font-weight: bold; margin-bottom: 0.5rem;">Avatar: "I see you look a bit sad. Want to talk about it?"</p>
+                            <p style="color: #059669; font-style: italic;">Child: "I miss my friend..."</p>
+                            <p style="color: #6B46C1; font-weight: bold;">Avatar: "Missing friends is hard. Would you like to draw a picture for them? I can help you write a message!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Age Groups Section -->
+    <section class="age-groups" id="age-groups">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Tailored for Every Stage</h2>
+                <p>Age-appropriate content that grows with your child</p>
+            </div>
+            <div class="age-tabs">
+                <button class="age-tab active" onclick="showAgeGroup('age-2-4')">Ages 2-4</button>
+                <button class="age-tab" onclick="showAgeGroup('age-5-6')">Ages 5-6</button>
+                <button class="age-tab" onclick="showAgeGroup('age-7-8')">Ages 7-8</button>
+            </div>
+            <div id="age-2-4" class="age-content active">
+                <div class="age-content-grid">
+                    <div>
+                        <h3>Early Learning Foundations</h3>
+                        <p>Your child's 3D avatar companion makes every moment magical. Watch as they explore the world together through natural, engaging conversations.</p>
+                        <div class="age-activities">
+                            <h4>Real Conversations Include:</h4>
+                            <ul class="activity-list">
+                                <li>"What color is your toy? Let's find more things that are red!"</li>
+                                <li>"I hear a doggy! What sound does a doggy make?"</li>
+                                <li>"You have 3 blocks! What happens if we add one more?"</li>
+                                <li>"Your teddy looks sleepy. Should we sing a lullaby?"</li>
+                                <li>"Yummy snack! Is it crunchy or soft?"</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="height: 300px; width: 100%; border-radius: 20px; position: relative; overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=600&h=400&fit=crop" alt="Children playing and learning" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent, rgba(107, 70, 193, 0.7)); border-radius: 20px; display: flex; align-items: flex-end; padding: 1.5rem;">
+                                <p style="color: white; font-weight: 600;">Early Learning Magic</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="age-5-6" class="age-content">
+                <div class="age-content-grid">
+                    <div>
+                        <h3>Pre-K & Kindergarten Excellence</h3>
+                        <p>Advanced conversations that build confidence and critical thinking. Your child's avatar notices everything - from emotions to interests - creating personalized learning moments.</p>
+                        <div class="age-activities">
+                            <h4>Example Interactions:</h4>
+                            <ul class="activity-list">
+                                <li>"You look excited! What made you happy today?"</li>
+                                <li>"Those letters spell CAT! Can you think of other animals?"</li>
+                                <li>"I see you have 5 crayons. If you share 2, how many are left?"</li>
+                                <li>"Your drawing has a sun! Why do you think the sun is important?"</li>
+                                <li>"Let's create a story about your toy dinosaur's adventure!"</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="height: 300px; width: 100%; border-radius: 20px; position: relative; overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=600&h=400&fit=crop" alt="Children in classroom" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent, rgba(16, 185, 129, 0.7)); border-radius: 20px; display: flex; align-items: flex-end; padding: 1.5rem;">
+                                <p style="color: white; font-weight: 600;">Building Confidence & Skills</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="age-7-8" class="age-content">
+                <div class="age-content-grid">
+                    <div>
+                        <h3>Elementary Enrichment</h3>
+                        <p>Sophisticated conversations that challenge and inspire. Avatars engage in deep discussions about your child's interests while seamlessly introducing new concepts.</p>
+                        <div class="age-activities">
+                            <h4>Advanced Conversations:</h4>
+                            <ul class="activity-list">
+                                <li>"You're building a tower! What makes buildings stay up?"</li>
+                                <li>"That book looks interesting. What do you think will happen next?"</li>
+                                <li>"I noticed you solved that puzzle quickly. Want to try a harder one?"</li>
+                                <li>"You mentioned volcanoes. Should we explore how they work?"</li>
+                                <li>"Great question! Let's research that together and find out why."</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="height: 300px; width: 100%; border-radius: 20px; position: relative; overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1518611507436-f9221403cca2?w=600&h=400&fit=crop" alt="Child with educational technology" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent, rgba(236, 72, 153, 0.7)); border-radius: 20px; display: flex; align-items: flex-end; padding: 1.5rem;">
+                                <p style="color: white; font-weight: 600;">Advanced Discovery Learning</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section class="research" id="research" style="padding: 5rem 0; background: white;">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Evidence-Based Learning</h2>
+                <p>Our approach is grounded in rigorous academic research and continuous scientific validation</p>
+            </div>
+            
+            <!-- Research Stats -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 3rem 0;">
+                <div style="text-align: center; padding: 2rem; background: var(--card-bg); border-radius: 20px;">
+                    <h3 style="font-size: 3rem; color: var(--primary-color); margin-bottom: 0.5rem;">87%</h3>
+                    <p style="font-weight: 600;">Improvement in Engagement</p>
+                    <small>Compared to traditional learning apps</small>
+                </div>
+                <div style="text-align: center; padding: 2rem; background: var(--card-bg); border-radius: 20px;">
+                    <h3 style="font-size: 3rem; color: var(--secondary-color); margin-bottom: 0.5rem;">2.3x</h3>
+                    <p style="font-weight: 600;">Faster Vocabulary Growth</p>
+                    <small>In 6-month longitudinal study</small>
+                </div>
+                <div style="text-align: center; padding: 2rem; background: var(--card-bg); border-radius: 20px;">
+                    <h3 style="font-size: 3rem; color: var(--accent-color); margin-bottom: 0.5rem;">94%</h3>
+                    <p style="font-weight: 600;">Parent Satisfaction</p>
+                    <small>From 1,000+ family survey</small>
+                </div>
+                <div style="text-align: center; padding: 2rem; background: var(--card-bg); border-radius: 20px;">
+                    <h3 style="font-size: 3rem; color: var(--dark-bg); margin-bottom: 0.5rem;">15+</h3>
+                    <p style="font-weight: 600;">Peer-Reviewed Papers</p>
+                    <small>Published by our research team</small>
+                </div>
+            </div>
+
+            <!-- White Papers -->
+            <h3 style="font-size: 2rem; margin: 3rem 0 2rem; color: var(--dark-bg);">White Papers & Research Publications</h3>
+            
+            <div style="display: grid; gap: 2rem;">
+                <!-- White Paper 1 -->
+                <div style="background: var(--card-bg); padding: 2rem; border-radius: 20px; display: flex; gap: 2rem; align-items: start;">
+                    <div style="font-size: 3rem; color: var(--primary-color);">📄</div>
+                    <div style="flex: 1;">
+                        <h4 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--dark-bg);">
+                            Conversational AI in Early Childhood Education: A Comprehensive Framework
+                        </h4>
+                        <p style="color: var(--body-text); margin-bottom: 1rem;">
+                            <strong>Authors:</strong> Dr. Sarah Chen, Prof. Michael Torres, Dr. Emily Watson<br>
+                            <strong>Published:</strong> Journal of Educational Technology Research, 2024
+                        </p>
+                        <p style="margin-bottom: 1rem;">
+                            This seminal paper outlines the theoretical framework behind EvoLearn AI's conversational approach, demonstrating how natural language interactions enhance cognitive development in children aged 2-8.
+                        </p>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <a href="#" class="secondary-button" style="font-size: 0.9rem; padding: 0.5rem 1.5rem; border-color: var(--primary-color); color: var(--primary-color);">Read Full Paper</a>
+                            <a href="#" style="color: var(--primary-color); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                                <span>Download PDF</span> ↓
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- White Paper 2 -->
+                <div style="background: var(--card-bg); padding: 2rem; border-radius: 20px; display: flex; gap: 2rem; align-items: start;">
+                    <div style="font-size: 3rem; color: var(--secondary-color);">📊</div>
+                    <div style="flex: 1;">
+                        <h4 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--dark-bg);">
+                            Emotion Recognition and Adaptive Learning: Impact on Child Development Outcomes
+                        </h4>
+                        <p style="color: var(--body-text); margin-bottom: 1rem;">
+                            <strong>Authors:</strong> Dr. James Liu, Dr. Priya Patel, Prof. Anna Johansson<br>
+                            <strong>Published:</strong> International Conference on AI in Education, 2024
+                        </p>
+                        <p style="margin-bottom: 1rem;">
+                            Groundbreaking research showing how emotion-aware AI avatars improve learning retention by 67% and emotional vocabulary by 84% in preschool-aged children.
+                        </p>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <a href="#" class="secondary-button" style="font-size: 0.9rem; padding: 0.5rem 1.5rem; border-color: var(--secondary-color); color: var(--secondary-color);">Read Full Paper</a>
+                            <a href="#" style="color: var(--secondary-color); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                                <span>Download PDF</span> ↓
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- White Paper 3 -->
+                <div style="background: var(--card-bg); padding: 2rem; border-radius: 20px; display: flex; gap: 2rem; align-items: start;">
+                    <div style="font-size: 3rem; color: var(--accent-color);">🔬</div>
+                    <div style="flex: 1;">
+                        <h4 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--dark-bg);">
+                            Privacy-First Design in Children's AI: Technical Architecture and Ethical Considerations
+                        </h4>
+                        <p style="color: var(--body-text); margin-bottom: 1rem;">
+                            <strong>Authors:</strong> Dr. Robert Kim, Prof. Lisa Anderson, Dr. Ahmed Hassan<br>
+                            <strong>Published:</strong> ACM Conference on Privacy and Security, 2024
+                        </p>
+                        <p style="margin-bottom: 1rem;">
+                            Detailed technical analysis of EvoLearn's privacy architecture, demonstrating compliance with COPPA, GDPR-K, and emerging AI ethics standards for children's technology.
+                        </p>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <a href="#" class="secondary-button" style="font-size: 0.9rem; padding: 0.5rem 1.5rem; border-color: var(--accent-color); color: var(--accent-color);">Read Full Paper</a>
+                            <a href="#" style="color: var(--accent-color); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                                <span>Download PDF</span> ↓
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Academic Partnerships -->
+            <div style="margin-top: 4rem; text-align: center;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 2rem; color: var(--dark-bg);">Research Partnerships</h3>
+                <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; align-items: center;">
+                    <div style="padding: 1rem;">
+                        <p style="font-weight: 600; color: var(--primary-color);">Stanford University</p>
+                        <small>AI & Education Lab</small>
+                    </div>
+                    <div style="padding: 1rem;">
+                        <p style="font-weight: 600; color: var(--primary-color);">MIT Media Lab</p>
+                        <small>Lifelong Kindergarten</small>
+                    </div>
+                    <div style="padding: 1rem;">
+                        <p style="font-weight: 600; color: var(--primary-color);">Harvard GSE</p>
+                        <small>Early Childhood Initiative</small>
+                    </div>
+                    <div style="padding: 1rem;">
+                        <p style="font-weight: 600; color: var(--primary-color);">UC Berkeley</p>
+                        <small>Human-AI Interaction</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="resources" id="resources" style="padding: 5rem 0; background: var(--card-bg);">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Resources for Parents & Educators</h2>
+                <p>Everything you need to maximize your child's learning journey with EvoLearn AI</p>
+            </div>
+
+            <!-- Resource Categories -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                
+                <!-- Parent Guides -->
+                <div style="background: white; padding: 2rem; border-radius: 20px; text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem; color: var(--primary-color);">📚</div>
+                    <h3 style="margin-bottom: 1rem;">Parent Guides</h3>
+                    <ul style="list-style: none; text-align: left; margin-bottom: 1.5rem;">
+                        <li style="padding: 0.5rem 0;">• Getting Started with EvoLearn</li>
+                        <li style="padding: 0.5rem 0;">• Understanding Your Dashboard</li>
+                        <li style="padding: 0.5rem 0;">• Supporting Your Child's Progress</li>
+                        <li style="padding: 0.5rem 0;">• Screen Time Best Practices</li>
+                        <li style="padding: 0.5rem 0;">• Conversation Starters</li>
+                    </ul>
+                    <a href="#" class="cta-button" style="font-size: 0.9rem; padding: 0.75rem 2rem;">Access Guides</a>
+                </div>
+
+                <!-- Educator Resources -->
+                <div style="background: white; padding: 2rem; border-radius: 20px; text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem; color: var(--secondary-color);">🎓</div>
+                    <h3 style="margin-bottom: 1rem;">Educator Resources</h3>
+                    <ul style="list-style: none; text-align: left; margin-bottom: 1.5rem;">
+                        <li style="padding: 0.5rem 0;">• Classroom Integration Guide</li>
+                        <li style="padding: 0.5rem 0;">• Curriculum Alignment Maps</li>
+                        <li style="padding: 0.5rem 0;">• Assessment Tools</li>
+                        <li style="padding: 0.5rem 0;">• Professional Development</li>
+                        <li style="padding: 0.5rem 0;">• Case Studies</li>
+                    </ul>
+                    <a href="#" class="cta-button" style="font-size: 0.9rem; padding: 0.75rem 2rem;">Educator Portal</a>
+                </div>
+
+                <!-- Research Library -->
+                <div style="background: white; padding: 2rem; border-radius: 20px; text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem; color: var(--accent-color);">🔬</div>
+                    <h3 style="margin-bottom: 1rem;">Research Library</h3>
+                    <ul style="list-style: none; text-align: left; margin-bottom: 1.5rem;">
+                        <li style="padding: 0.5rem 0;">• Published Papers</li>
+                        <li style="padding: 0.5rem 0;">• Efficacy Studies</li>
+                        <li style="padding: 0.5rem 0;">• Technical Documentation</li>
+                        <li style="padding: 0.5rem 0;">• Conference Presentations</li>
+                        <li style="padding: 0.5rem 0;">• Annual Impact Reports</li>
+                    </ul>
+                    <a href="#" class="cta-button" style="font-size: 0.9rem; padding: 0.75rem 2rem;">Browse Research</a>
+                </div>
+            </div>
+
+            <!-- Webinar Section -->
+            <div style="background: white; padding: 3rem; border-radius: 20px; margin-top: 3rem; text-align: center;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--dark-bg);">Upcoming Webinars & Events</h3>
+                <p style="margin-bottom: 2rem;">Join our experts to learn more about maximizing your child's learning potential</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; text-align: left;">
+                        <p style="color: var(--primary-color); font-weight: 600; margin-bottom: 0.5rem;">January 28, 2025</p>
+                        <h4 style="margin-bottom: 0.5rem;">Introduction to Conversational Learning</h4>
+                        <p style="font-size: 0.9rem; color: var(--body-text);">Dr. Sarah Chen explores how AI conversations enhance early childhood development</p>
+                        <a href="#" style="color: var(--primary-color); text-decoration: none; font-weight: 600; display: inline-block; margin-top: 1rem;">Register →</a>
+                    </div>
+                    <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; text-align: left;">
+                        <p style="color: var(--secondary-color); font-weight: 600; margin-bottom: 0.5rem;">February 5, 2025</p>
+                        <h4 style="margin-bottom: 0.5rem;">Supporting Emotional Development with AI</h4>
+                        <p style="font-size: 0.9rem; color: var(--body-text);">Learn how emotion recognition technology helps children build EQ</p>
+                        <a href="#" style="color: var(--secondary-color); text-decoration: none; font-weight: 600; display: inline-block; margin-top: 1rem;">Register →</a>
+                    </div>
+                    <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; text-align: left;">
+                        <p style="color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem;">February 12, 2025</p>
+                        <h4 style="margin-bottom: 0.5rem;">Classroom Success Stories</h4>
+                        <p style="font-size: 0.9rem; color: var(--body-text);">Educators share best practices for integrating EvoLearn in schools</p>
+                        <a href="#" style="color: var(--accent-color); text-decoration: none; font-weight: 600; display: inline-block; margin-top: 1rem;">Register →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Download Section -->
+            <div style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-bg) 100%); padding: 3rem; border-radius: 20px; margin-top: 3rem; text-align: center; color: white;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Download Our Complete Research Package</h3>
+                <p style="margin-bottom: 2rem; opacity: 0.9;">Get instant access to all white papers, case studies, and implementation guides</p>
+                <form style="display: flex; gap: 1rem; max-width: 500px; margin: 0 auto; flex-wrap: wrap; justify-content: center;">
+                    <input type="email" placeholder="Enter your email" style="flex: 1; padding: 0.75rem 1.5rem; border-radius: 50px; border: none; font-size: 1rem;">
+                    <button type="submit" class="cta-button" style="background: white; color: var(--primary-color);">Download Now</button>
+                </form>
+                <small style="opacity: 0.7; display: block; margin-top: 1rem;">Join 10,000+ educators and parents in our research community</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parent Dashboard Section -->
+    <section style="padding: 5rem 0; background: #F9FAFB;">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Stay Connected to Your Child's Progress</h2>
+                <p>Comprehensive insights that help you support their learning journey</p>
+            </div>
+            <div style="width: 100%; height: 400px; margin: 3rem 0; border-radius: 20px; position: relative; overflow: hidden; background: linear-gradient(135deg, #1E1B4B 0%, #312E81 100%);">
+                <div style="position: absolute; inset: 0; border-radius: 20px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; height: 100%; align-items: center; padding: 2rem; gap: 2rem;">
+                        <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; backdrop-filter: blur(10px);">
+                            <div style="font-size: 4rem; margin-bottom: 1rem;">📊</div>
+                            <h3 style="color: white; margin-bottom: 1rem;">Parent Dashboard</h3>
+                            <p style="color: rgba(255,255,255,0.8);">Track progress, celebrate milestones, and stay connected to your child's learning journey</p>
+                        </div>
+                        <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; backdrop-filter: blur(10px);">
+                            <div style="font-size: 4rem; margin-bottom: 1rem;">💡</div>
+                            <h3 style="color: white; margin-bottom: 1rem;">Real-Time Insights</h3>
+                            <p style="color: rgba(255,255,255,0.8);">See what sparks curiosity and where your child needs support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;">📊</div>
+                    <h3>Learning Analytics</h3>
+                    <p>Track vocabulary growth, concept mastery, and skill development with detailed progress reports</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;">🎯</div>
+                    <h3>Milestone Tracking</h3>
+                    <p>Celebrate achievements and identify areas for support with personalized learning goals</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;">💬</div>
+                    <h3>Conversation Insights</h3>
+                    <p>Review highlights from your child's conversations and see what sparks their curiosity</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;">🔔</div>
+                    <h3>Smart Notifications</h3>
+                    <p>Get updates on breakthroughs, emotional moments, and suggested parent-child activities</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Families Love EvoLearn AI</h2>
+                <p>Join thousands of satisfied parents and educators</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"My daughter was eating breakfast and her avatar asked about where eggs come from. It led to a 20-minute conversation about farms, chickens, and even nutrition. She now asks me to have 'learning breakfast' every morning!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div>
+                            <strong>Sarah Martinez</strong><br>
+                            <small>Parent of 5-year-old</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The emotion recognition is incredible. When my son was frustrated with homework, the avatar noticed and helped him take deep breaths and break the problem into smaller steps. It's like having a patient tutor who truly understands."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JL</div>
+                        <div>
+                            <strong>Jennifer Lee</strong><br>
+                            <small>Parent of 7-year-old</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"We're a multicultural family, and the avatar seamlessly switches between English and Mandarin. Yesterday it taught my daughter about Chinese New Year while she was playing with her toy dragon!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RP</div>
+                        <div>
+                            <strong>Robert Park</strong><br>
+                            <small>Parent of twins, age 6</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Simple, Transparent Pricing</h2>
+                <p>Choose the plan that works best for your family</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Basic</h3>
+                    <div class="price">$19<span>/month</span></div>
+                    <p>Perfect for getting started</p>
+                    <ul class="pricing-features">
+                        <li>1 child profile</li>
+                        <li>Core curriculum access</li>
+                        <li>Basic progress tracking</li>
+                        <li>Email support</li>
+                        <li>Mobile & tablet access</li>
+                    </ul>
+                    <a href="#start" class="cta-button">Start Free Trial</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Family</h3>
+                    <div class="price">$29<span>/month</span></div>
+                    <p>Most popular choice</p>
+                    <ul class="pricing-features">
+                        <li>Up to 3 child profiles</li>
+                        <li>Full curriculum library</li>
+                        <li>Advanced analytics</li>
+                        <li>Priority support</li>
+                        <li>All devices + smart TV</li>
+                        <li>Offline mode</li>
+                    </ul>
+                    <a href="#start" class="cta-button" style="background: white; color: var(--primary-color);">Start Free Trial</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>School</h3>
+                    <div class="price">Custom</div>
+                    <p>For educational institutions</p>
+                    <ul class="pricing-features">
+                        <li>Unlimited students</li>
+                        <li>Classroom management</li>
+                        <li>Custom curriculum</li>
+                        <li>Training & onboarding</li>
+                        <li>Dedicated support</li>
+                        <li>API access</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Avatar Showcase Section -->
+    <section style="padding: 5rem 0; background: linear-gradient(135deg, var(--dark-bg) 0%, #312E81 100%); color: white; position: relative; overflow: hidden;">
+        <div style="position: absolute; width: 400px; height: 400px; background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%); bottom: -200px; left: -200px; opacity: 0.2;"></div>
+        <div class="section-container" style="position: relative; z-index: 1;">
+            <div class="section-header">
+                <h2 style="color: white;">Meet Your Child's AI Companions</h2>
+                <p style="color: rgba(255,255,255,0.9);">Expressive 3D avatars that create meaningful connections</p>
+            </div>
+            <div style="width: 100%; height: 400px; margin: 3rem 0; border-radius: 20px; position: relative; overflow: hidden;">
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);">
+                    <div style="position: absolute; inset: 0; background: rgba(107, 70, 193, 0.3); border-radius: 20px; display: flex; align-items: center; justify-content: center;">
+                        <div style="text-align: center; padding: 2rem;">
+                            <h3 style="color: white; font-size: 2rem; margin-bottom: 2rem;">Meet Your AI Learning Companions</h3>
+                            <div style="display: flex; justify-content: center; gap: 3rem; font-size: 5rem; margin-bottom: 2rem;">
+                                <div style="text-align: center;">
+                                    <div>🤖</div>
+                                    <p style="color: white; font-size: 1rem; margin-top: 0.5rem;">Eva</p>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div>🦊</div>
+                                    <p style="color: white; font-size: 1rem; margin-top: 0.5rem;">Felix</p>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div>🦄</div>
+                                    <p style="color: white; font-size: 1rem; margin-top: 0.5rem;">Luna</p>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div>🐻</div>
+                                    <p style="color: white; font-size: 1rem; margin-top: 0.5rem;">Benny</p>
+                                </div>
+                            </div>
+                            <p style="color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto;">Four unique personalities designed to match your child's learning style and preferences</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 3rem; text-align: center;">
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; backdrop-filter: blur(10px);">
+                    <div style="font-size: 5rem; margin-bottom: 1rem;">🤖</div>
+                    <h3 style="color: white;">Eva</h3>
+                    <p style="color: rgba(255,255,255,0.8);">Curious & Creative</p>
+                    <small style="color: rgba(255,255,255,0.6);">Loves art, stories, and exploring new ideas</small>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; backdrop-filter: blur(10px);">
+                    <div style="font-size: 5rem; margin-bottom: 1rem;">🦊</div>
+                    <h3 style="color: white;">Felix</h3>
+                    <p style="color: rgba(255,255,255,0.8);">Playful & Encouraging</p>
+                    <small style="color: rgba(255,255,255,0.6);">Great with games, puzzles, and adventures</small>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; backdrop-filter: blur(10px);">
+                    <div style="font-size: 5rem; margin-bottom: 1rem;">🦄</div>
+                    <h3 style="color: white;">Luna</h3>
+                    <p style="color: rgba(255,255,255,0.8);">Gentle & Wise</p>
+                    <small style="color: rgba(255,255,255,0.6);">Perfect for emotional support and mindfulness</small>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; backdrop-filter: blur(10px);">
+                    <div style="font-size: 5rem; margin-bottom: 1rem;">🐻</div>
+                    <h3 style="color: white;">Benny</h3>
+                    <p style="color: rgba(255,255,255,0.8);">Friendly & Patient</p>
+                    <small style="color: rgba(255,255,255,0.6);">Ideal for younger learners and first-timers</small>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 2rem; color: rgba(255,255,255,0.8);">Each avatar has unique personality traits and teaching styles to match your child's preferences</p>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section style="padding: 5rem 0; background: white;">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Powered by Advanced Technology</h2>
+                <p>Built with the latest AI innovations for safe, effective learning</p>
+            </div>
+            <div style="width: 100%; height: 350px; margin: 3rem 0; border-radius: 20px; position: relative; overflow: hidden; background: linear-gradient(135deg, #6B46C1 0%, #10B981 100%);">
+                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+                    <div style="text-align: center; padding: 2rem;">
+                        <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; font-size: 3rem;">
+                            <span title="AI Technology">🧠</span>
+                            <span title="Computer Vision">👁️</span>
+                            <span title="Adaptive Learning">📈</span>
+                            <span title="Secure & Safe">🔒</span>
+                        </div>
+                        <h3 style="color: white; font-size: 1.8rem; margin-bottom: 1rem;">Cutting-Edge Technology for Safe Learning</h3>
+                        <p style="color: rgba(255,255,255,0.9); max-width: 700px;">AI that understands, adapts, and protects - giving you peace of mind while your child explores</p>
+                    </div>
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div style="background: var(--card-bg); padding: 2rem; border-radius: 20px; text-align: center;">
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">GPT-Based Conversation Engine</h3>
+                    <p>Fine-tuned specifically for children's education, ensuring age-appropriate, engaging dialogue</p>
+                </div>
+                <div style="background: var(--card-bg); padding: 2rem; border-radius: 20px; text-align: center;">
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Computer Vision & Emotion AI</h3>
+                    <p>Real-time analysis of facial expressions and environment for contextual learning</p>
+                </div>
+                <div style="background: var(--card-bg); padding: 2rem; border-radius: 20px; text-align: center;">
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Adaptive Learning Algorithms</h3>
+                    <p>Continuously adjusts difficulty and topics based on your child's progress and interests</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="start">
+        <div class="section-container">
+            <div style="background: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&h=400&fit=crop') center/cover; width: 200px; height: 200px; margin: 0 auto 2rem; border-radius: 20px; position: relative;">
+                <div style="position: absolute; inset: 0; background: radial-gradient(circle, rgba(255,255,255,0.9), rgba(255,255,255,0.6)); border-radius: 20px; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 4rem;">🚀</span>
+                </div>
+            </div>
+            <h2>Ready to Transform Your Child's Learning?</h2>
+            <p>Join thousands of families already experiencing the future of education</p>
+            <a href="#signup" class="cta-button" style="background: white; color: var(--primary-color); font-size: 1.1rem; padding: 1rem 3rem;">
+                Start Your 14-Day Free Trial
+            </a>
+            <p style="font-size: 0.9rem; margin-top: 1rem; opacity: 0.8;">No credit card required • Cancel anytime</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#demo">Demo</a></li>
+                    <li><a href="#schools">For Schools</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#guides">Parent Guides</a></li>
+                    <li><a href="#research">Research</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                    <li><a href="#press">Press</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Service</a></li>
+                    <li><a href="#coppa">COPPA Compliance</a></li>
+                    <li><a href="#security">Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 EvoLearn AI. All rights reserved. Made with ❤️ for children's education.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Show/hide scroll to top button
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            if (window.scrollY > 500) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        // Age group tabs
+        function showAgeGroup(ageId) {
+            // Hide all age content
+            const allContent = document.querySelectorAll('.age-content');
+            allContent.forEach(content => content.classList.remove('active'));
+            
+            // Remove active from all tabs
+            const allTabs = document.querySelectorAll('.age-tab');
+            allTabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected age content
+            document.getElementById(ageId).classList.add('active');
+            
+            // Add active to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Scroll to top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Close mobile menu if open
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all feature cards and testimonial cards
+        document.querySelectorAll('.feature-card, .testimonial-card, .pricing-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Add loading animation to CTA buttons
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#start' || this.getAttribute('href') === '#signup') {
+                    e.preventDefault();
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<span class="loading-spinner"></span>';
+                    this.style.pointerEvents = 'none';
+                    
+                    // Simulate loading
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.style.pointerEvents = 'auto';
+                        alert('Sign up form would open here in the real application!');
+                    }, 2000);
+                }
+            });
+        });
+
+        // Dynamic copyright year
+        document.querySelector('.footer-bottom p').innerHTML = 
+            `&copy; ${new Date().getFullYear()} EvoLearn AI. All rights reserved. Made with ❤️ for children's education.`;
+    </script>
+</body>
+</html>
